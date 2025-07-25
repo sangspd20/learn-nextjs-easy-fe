@@ -13,10 +13,11 @@ const proxy = httpProxy.createProxyServer();
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   return new Promise<void>((resolve, reject) => {
     req.headers.cookie = '';
-    req.url = req.url?.replace(/^\/api/, '');
+    //req.url = req.url?.replace(/^\/api/, '');
 
     proxy.web(req, res, {
-      target: 'https://jsonplaceholder.typicode.com',
+      //target: 'https://jsonplaceholder.typicode.com',
+      target: ' https://js-post-api.herokuapp.com',
       changeOrigin: true,
       selfHandleResponse: false,
     });
