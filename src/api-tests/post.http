@@ -1,0 +1,8 @@
+@baseUrl = http://localhost:3000
+### 🔐 Get list post paging
+GET {{baseUrl}}/api/todos
+Content-Type: application/json
+
+
+
+
