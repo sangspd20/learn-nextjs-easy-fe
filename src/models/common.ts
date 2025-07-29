@@ -1,16 +1,18 @@
-import { NextPage } from 'next';
-import { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
+//import { EmotionCache } from '@emotion/cache'
+import { NextPage } from 'next'
+import { AppProps } from 'next/app'
+import { ReactElement, ReactNode } from 'react'
 
 export interface LayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export type NextPageWithLayout = NextPage & {
-  Layout?: (page: LayoutProps) => ReactElement;
-};
+  Layout?: (page: LayoutProps) => ReactElement
+}
 
 // Extend AppProps to include the layout
 export type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+  Component: NextPageWithLayout
+  //emotionCache?: EmotionCache
+}
