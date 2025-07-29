@@ -7,7 +7,6 @@ type Data = {
 export const config = {
   api: {
     bodyParser: false,
-    externalResolver: true,
   },
 };
 
@@ -20,6 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
   return new Promise<void>((resolve, reject) => {
     req.headers.cookie = '';
+    console.log('Proxying to:', process.env.API_URL);
 
     const handleLoginResponse: ProxyResCallback = (proxyRes, req, res) => {
       let body = '';
@@ -30,13 +30,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       proxyRes.on('end', () => {
         try {
           const { accessToken, expiredAt } = JSON.parse(body);
-          const cookies =  new Cookies(req,res,{secure:process.env.NODE_ENV !== 'development'})
-          cookies.set('access_token',access)
- 
+          const cookies = new Cookies(req, res, { secure: process.env.NODE_ENV !== 'development' });
+          cookies.set('access_token', accessToken, {
+            httpOnly: true,
+            sameSite: 'lax',
+            expires: new Date(expiredAt),
+          });
           (res as NextApiResponse).status(200).json({ message: 'Login successfully' });
         } catch (error) {
           (res as NextApiResponse).status(500).json({ message: 'something went wrong' });
         }
+
+        resolve();
       });
     };
     proxy.once('proxyRes', handleLoginResponse);

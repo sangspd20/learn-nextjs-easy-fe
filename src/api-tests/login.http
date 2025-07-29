@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+### 🔐 Get list post paging
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "username":"easy",
+    "password":"123qwe"
+}
+
+
+
+
