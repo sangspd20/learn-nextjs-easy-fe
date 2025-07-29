@@ -1,15 +1,17 @@
 import { authApi } from '@/api-clients'
 import { useAuth } from '@/hooks'
+import { useRouter } from 'next/router'
 import * as React from 'react'
 
 export default function LoginPage() {
+  const router = useRouter()
   const { profile, login, logout } = useAuth({
     revalidateOnMount: false,
   })
   async function handleLogin() {
     try {
       await login()
-      console.log('redirect to dashboard')
+      router.push('/about')
     } catch (error) {
       console.log('fail to login', error)
     }
@@ -29,6 +31,8 @@ export default function LoginPage() {
       console.log('fail to profile', error)
     }
   }
+
+  const handleGotoAbout = () => router.push('/about')
   return (
     <div>
       <h1>LoginPage</h1>
@@ -37,6 +41,7 @@ export default function LoginPage() {
       <button onClick={handleLogin}>login</button>
       <button onClick={handleGetProfile}>get profile</button>
       <button onClick={handleLogout}>logout</button>
+      <button onClick={handleGotoAbout}>go to about page</button>
     </div>
   )
 }

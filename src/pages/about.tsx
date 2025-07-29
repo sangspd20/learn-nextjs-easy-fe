@@ -1,8 +1,8 @@
-import { MainLayout } from '@/components/layout';
-import * as React from 'react';
+import { AdminLayout } from '@/components/layout'
+import * as React from 'react'
 
 export default function About() {
-  return <>About</>;
+  return <>About</>
 }
 
-About.Layout = MainLayout;
+About.Layout = AdminLayout
