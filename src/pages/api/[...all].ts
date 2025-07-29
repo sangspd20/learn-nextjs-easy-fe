@@ -23,7 +23,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     proxy.web(req, res, {
       //target: 'https://jsonplaceholder.typicode.com',
-      target: ' https://js-post-api.herokuapp.com',
+      target: process.env.API_URL,
       changeOrigin: true,
       selfHandleResponse: false,
     })
