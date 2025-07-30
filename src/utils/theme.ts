@@ -25,4 +25,30 @@ export const theme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
+
+  components: {
+    MuiContainer: {
+      defaultProps: {
+        maxWidth: 'md',
+      },
+
+      styleOverrides: {
+        maxWidthSm: {
+          maxWidth: '680px',
+
+          '@media (min-width:600px)': {
+            maxWidth: '680px',
+          },
+        },
+
+        maxWidthMd: {
+          maxWidth: '860px',
+
+          '@media (min-width:900px)': {
+            maxWidth: '860px',
+          },
+        },
+      },
+    },
+  },
 })
