@@ -13,10 +13,10 @@ export const theme = createTheme({
   cssVariables: true,
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#FF6464',
     },
     secondary: {
-      main: '#19857b',
+      main: '#00A8CC',
     },
     error: {
       main: red.A400,
