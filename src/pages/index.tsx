@@ -1,19 +1,13 @@
+import { HeroSection } from '@/components/home'
 import { MainLayout } from '@/components/layout'
 import { Box } from '@mui/material'
-import { Geist, Geist_Mono } from 'next/font/google'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
 
 export default function Home() {
-  return <Box>Home Page</Box>
+  return (
+    <Box>
+      <HeroSection />
+    </Box>
+  )
 }
 
 Home.Layout = MainLayout

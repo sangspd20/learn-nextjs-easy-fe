@@ -19,7 +19,7 @@ export default function HeaderDesktop(props: HeaderDesktopProps) {
               component={NextLink}
               href={route.path}
               className={clsx({ active: router.pathname === route.path })}
-              sx={{ ml: 2 }}
+              sx={{ ml: 2, fontWeight: 'medium' }}
             >
               {route.label}
             </MuiLink>
