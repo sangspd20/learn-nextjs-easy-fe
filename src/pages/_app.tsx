@@ -4,7 +4,7 @@ import { AppPropsWithLayout } from '@/models'
 import '@/styles/globals.css'
 import { SWRConfig } from 'swr'
 import { CacheProvider } from '@emotion/react'
-import { createEmotionCache, theme } from '@/utils'
+import { createEmotionCache, heebo, theme } from '@/utils'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material'
 const clientSideEmotionCache = createEmotionCache()
@@ -16,13 +16,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <SWRConfig
-          value={{ fetcher: (url: string) => axiosClient.get(url), shouldRetryOnError: false }}
-        >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SWRConfig>
+        <div className={heebo.className}>
+          <SWRConfig
+            value={{ fetcher: (url: string) => axiosClient.get(url), shouldRetryOnError: false }}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </SWRConfig>
+        </div>
       </ThemeProvider>
     </CacheProvider>
   )
