@@ -1,5 +1,5 @@
 import { Roboto, Heebo } from 'next/font/google'
-import { createTheme } from '@mui/material/styles'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
 
 export const roboto = Roboto({
@@ -15,7 +15,7 @@ export const heebo = Heebo({
 })
 
 // Create a theme instance.
-export const theme = createTheme({
+export let theme = createTheme({
   cssVariables: true,
   palette: {
     primary: {
@@ -85,3 +85,4 @@ export const theme = createTheme({
     },
   },
 })
+theme = responsiveFontSizes(theme)
