@@ -16,6 +16,7 @@
     "@mui/material": "^7.2.0",
     "@mui/material-nextjs": "^7.2.0",
     "axios": "^1.11.0",
+    "clsx": "^2.1.1",
     "cookie": "^1.0.2",
     "cookies": "^0.9.1",
     "http-proxy": "^1.18.1",
