@@ -41,5 +41,10 @@
     "eslint-config-next": "15.4.2",
     "typescript": "^5"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.2",
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  }
 }
