@@ -2,6 +2,9 @@ import axiosClient from '@/api-clients/axios-client'
 import { EmptyLayout } from '@/components/layout'
 import { AppPropsWithLayout } from '@/models'
 import '@/styles/globals.css'
+import 'prismjs/themes/prism-tomorrow.css' // or another Prism theme
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // Optional if using line numbers
+
 import { SWRConfig } from 'swr'
 import { CacheProvider } from '@emotion/react'
 import { createEmotionCache, heebo, theme } from '@/utils'
