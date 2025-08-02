@@ -7,6 +7,10 @@ import rehypeFormat from 'rehype-format'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
+import remarkToc from 'remark-toc'
+
 import { unified } from 'unified'
 export interface BlogPageProps {
   post: Post
@@ -51,7 +55,10 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async (
   // parse md to html
   const file = await unified()
     .use(remarkParse)
+    .use(remarkToc, { heading: 'agenda.*' })
     .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
     .use(rehypeDocument, { title: 'Blog details page' })
     .use(rehypeFormat)
     .use(rehypeStringify)
