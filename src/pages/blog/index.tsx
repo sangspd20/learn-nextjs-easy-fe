@@ -2,13 +2,14 @@ import { GetStaticProps, GetStaticPropsContext } from 'next'
 import * as React from 'react'
 import Link from 'next/link'
 import { getPostList } from '@/utils'
+import { Post } from '@/models'
 
 export interface BlogListPageProps {
-  posts: any[]
+  posts: Post[]
 }
 
 export default function BlogListPage({ posts }: BlogListPageProps) {
-  // console.log('posts', posts)
+  console.log('posts', posts)
 
   return (
     <div>
@@ -34,11 +35,11 @@ export const getStaticProps: GetStaticProps<BlogListPageProps> = async () => {
   // console.log(data)
 
   // convert markdown files into list of javascript objects
-  const data = await getPostList()
+  const postList = await getPostList()
 
   return {
     props: {
-      posts: [],
+      posts: postList,
       //   posts: data.map((x: any) => ({ id: x.id, title: x.title })),
     },
   }
