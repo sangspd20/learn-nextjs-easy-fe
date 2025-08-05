@@ -1,7 +1,7 @@
 import { InputField } from '@/components/form'
 import { LoginPayload } from '@/models'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Button, IconButton, InputAdornment } from '@mui/material'
+import { Button, CircularProgress, IconButton, InputAdornment } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -25,7 +25,11 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
       .min(6, 'Password is required to have at least 6 characters'),
   })
   const [showPassword, setShowPassword] = useState<boolean>(false)
-  const { control, handleSubmit } = useForm<LoginPayload>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<LoginPayload>({
     defaultValues: {
       username: '',
       password: '',
@@ -33,9 +37,8 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
     resolver: yupResolver(schema),
   })
 
-  function handleLoginSubmit(payload: LoginPayload) {
-    console.log(payload)
-    onSubmit?.(payload)
+  async function handleLoginSubmit(payload: LoginPayload) {
+    await onSubmit?.(payload)
   }
 
   return (
@@ -62,7 +65,14 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         }}
       />
 
-      <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }}>
+      <Button
+        disabled={isSubmitting}
+        startIcon={isSubmitting ? <CircularProgress color="inherit" size="1em" /> : null}
+        type="submit"
+        variant="contained"
+        fullWidth
+        sx={{ mt: 3 }}
+      >
         Login
       </Button>
     </Box>
