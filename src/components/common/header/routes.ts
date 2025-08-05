@@ -6,6 +6,7 @@ export const ROUTE_LIST = [
   {
     path: '/works',
     label: 'Works',
+    requireLogin: true,
   },
   {
     path: '/blog',
