@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.1",
     "@mui/icons-material": "^7.2.0",
     "@mui/material": "^7.2.0",
     "@mui/material-nextjs": "^7.2.0",
@@ -38,7 +39,8 @@
     "remark-rehype": "^11.1.2",
     "remark-toc": "^9.0.0",
     "swr": "^2.3.4",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
