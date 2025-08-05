@@ -1,4 +1,5 @@
 import { authApi } from '@/api-clients'
+import { LoginForm } from '@/components/auth'
 import { useAuth } from '@/hooks'
 import { useRouter } from 'next/router'
 import * as React from 'react'
@@ -42,6 +43,7 @@ export default function LoginPage() {
       <button onClick={handleGetProfile}>get profile</button>
       <button onClick={handleLogout}>logout</button>
       <button onClick={handleGotoAbout}>go to about page</button>
+      <LoginForm />
     </div>
   )
 }
