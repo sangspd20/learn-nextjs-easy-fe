@@ -2,11 +2,11 @@ import { MainLayout } from '@/components/layout'
 import { WorkList } from '@/components/work'
 import { useWorkList } from '@/hooks'
 import { ListParams } from '@/models'
-import { Box, Button, Container, LinearProgress, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import { useState } from 'react'
 
 export default function WorksPage() {
-  const [filters, setFilters] = useState<Partial<ListParams>>({ _page: 1, _limit: 10 })
+  const [filters, setFilters] = useState<Partial<ListParams>>({ _page: 1, _limit: 3 })
 
   const { data, isLoading } = useWorkList({ params: filters })
   console.log({ data, isLoading })
@@ -34,7 +34,7 @@ export default function WorksPage() {
           </Typography>
         </Box>
 
-        {isLoading ? <LinearProgress /> : <WorkList workList={data?.data || []} />}
+        <WorkList workList={data?.data || []} loading={isLoading} />
 
         <Box>
           <Button variant="contained" onClick={handlePrevClick}>
