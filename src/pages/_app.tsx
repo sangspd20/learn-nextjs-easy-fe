@@ -10,6 +10,7 @@ import { CacheProvider } from '@emotion/react'
 import { createEmotionCache, heebo, theme } from '@/utils'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material'
+import { ToastContainer } from 'react-toastify'
 const clientSideEmotionCache = createEmotionCache()
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
@@ -19,6 +20,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        <ToastContainer />
+
         <div className={heebo.className}>
           <SWRConfig
             value={{ fetcher: (url: string) => axiosClient.get(url), shouldRetryOnError: false }}

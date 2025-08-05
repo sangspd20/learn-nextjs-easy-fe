@@ -4174,6 +4174,7 @@ __metadata:
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
     react-hook-form: "npm:^7.62.0"
+    react-toastify: "npm:^11.0.5"
     rehype-autolink-headings: "npm:^7.1.0"
     rehype-document: "npm:^7.0.3"
     rehype-format: "npm:^5.0.1"
@@ -5439,6 +5440,18 @@ __metadata:
   version: 19.1.1
   resolution: "react-is@npm:19.1.1"
   checksum: 10c0/3dba763fcd69835ae263dcd6727d7ffcc44c1d616f04b7329e67aefdc66a567af4f8dcecdd29454c7a707c968aa1eb85083a83fb616f01675ef25e71cf082f97
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "react-toastify@npm:11.0.5"
+  dependencies:
+    clsx: "npm:^2.1.1"
+  peerDependencies:
+    react: ^18 || ^19
+    react-dom: ^18 || ^19
+  checksum: 10c0/50f5b81323ebb1957b2efd0963fac24aa1407155d16ab756ffd6d0f42f8af17e796b3958a9fce13e9d1b945d6c3a5a9ebf13529478474d8a2af4bf1dd0db67d2
   languageName: node
   linkType: hard
 

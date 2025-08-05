@@ -1,52 +1,25 @@
-import { authApi } from '@/api-clients'
 import { LoginForm } from '@/components/auth'
 import { useAuth } from '@/hooks'
 import { LoginPayload } from '@/models'
+import { getErrorMessage } from '@/utils'
 import { Box, Paper, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import * as React from 'react'
+import { toast } from 'react-toastify'
 
 export default function LoginPage() {
   const router = useRouter()
   const { profile, login, logout } = useAuth({
     revalidateOnMount: false,
   })
-  async function handleLogin() {
-    try {
-      await login({
-        username: 'test1',
-        password: '123123',
-      })
-      router.push('/about')
-    } catch (error) {
-      console.log('fail to login', error)
-    }
-  }
-  async function handleLogout() {
-    try {
-      logout()
-    } catch (error) {
-      console.log('fail to logout', error)
-    }
-  }
-
-  async function handleGetProfile() {
-    try {
-      await authApi.getProfile()
-    } catch (error) {
-      console.log('fail to profile', error)
-    }
-  }
-
-  const handleGotoAbout = () => router.push('/about')
 
   async function handleLoginSubmit(payload: LoginPayload) {
     try {
       await login(payload)
       // console.log('redirect to dashboard')
       router.push('/')
-    } catch (error) {
-      console.log('failed to login', error)
+    } catch (error: unknown) {
+      const message = getErrorMessage(error)
+      toast.error(message)
     }
   }
 
