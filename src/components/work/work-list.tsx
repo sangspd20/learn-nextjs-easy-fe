@@ -1,14 +1,30 @@
 import { WorkCard } from '@/components/work'
 import { Work } from '@/models'
-import { Box, Divider } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 import React, { Fragment } from 'react'
+import Image from 'next/image'
 
 export interface WorkListProps {
   workList: Work[]
 }
 
 export function WorkList({ workList }: WorkListProps) {
-  if (workList.length === 0) return null
+  if (workList.length === 0)
+    return (
+      <Box textAlign="center">
+        <Image
+          src={
+            'https://res.cloudinary.com/kimwy/image/upload/v1680947456/learn-nextjs/no-data_liu3mu.svg'
+          }
+          width={150}
+          height={150}
+          layout="fixed"
+          alt="no data"
+        />
+
+        <Typography>No data</Typography>
+      </Box>
+    )
 
   return (
     <Box>

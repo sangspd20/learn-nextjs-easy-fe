@@ -1,7 +1,8 @@
 import { MainLayout } from '@/components/layout'
+import { WorkList } from '@/components/work'
 import { useWorkList } from '@/hooks'
 import { ListParams } from '@/models'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Container, LinearProgress, Typography } from '@mui/material'
 import { useState } from 'react'
 
 export default function WorksPage() {
@@ -10,17 +11,6 @@ export default function WorksPage() {
   const { data, isLoading } = useWorkList({ params: filters })
   console.log({ data, isLoading })
 
-  // useEffect(() => {
-  // 	;(async () => {
-  // 		try {
-  // 			const workList = await workApi.getAll({ _page: 1 })
-  // 			console.log({ workList })
-  // 		} catch (error) {
-  // 			console.log('failed to fetch work list', error)
-  // 		}
-  // 	})()
-  // }, [])
-
   function handleNextClick() {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -28,15 +18,35 @@ export default function WorksPage() {
     }))
   }
 
+  function handlePrevClick() {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _page: (prevFilters?._page || 0) - 1,
+    }))
+  }
+
   return (
-    <div>
-      Works Page
-      <Box>
-        <Button variant="contained" onClick={handleNextClick}>
-          Next Page
-        </Button>
-      </Box>
-    </div>
+    <Box>
+      <Container>
+        <Box mb={4} mt={8}>
+          <Typography component="h1" variant="h3" fontWeight="bold">
+            Work
+          </Typography>
+        </Box>
+
+        {isLoading ? <LinearProgress /> : <WorkList workList={data?.data || []} />}
+
+        <Box>
+          <Button variant="contained" onClick={handlePrevClick}>
+            Prev Page
+          </Button>
+
+          <Button variant="contained" onClick={handleNextClick}>
+            Next Page
+          </Button>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 
