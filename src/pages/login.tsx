@@ -2,6 +2,7 @@ import { authApi } from '@/api-clients'
 import { LoginForm } from '@/components/auth'
 import { useAuth } from '@/hooks'
 import { LoginPayload } from '@/models'
+import { Box, Paper, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 
@@ -43,22 +44,30 @@ export default function LoginPage() {
     try {
       await login(payload)
       // console.log('redirect to dashboard')
-      // router.push('/about')
+      router.push('/')
     } catch (error) {
       console.log('failed to login', error)
     }
   }
 
   return (
-    <div>
-      <h1>LoginPage</h1>
+    <Box>
+      <Paper
+        elevation={4}
+        sx={{
+          mx: 'auto',
+          my: 8,
+          p: 4,
+          maxWidth: '480px',
+          textAlign: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5" mb={3}>
+          Easy Frontend - Login
+        </Typography>
 
-      <p>Profile: {JSON.stringify(profile || {})}</p>
-      <button onClick={handleLogin}>login</button>
-      <button onClick={handleGetProfile}>get profile</button>
-      <button onClick={handleLogout}>logout</button>
-      <button onClick={handleGotoAbout}>go to about page</button>
-      <LoginForm onSubmit={handleLoginSubmit} />
-    </div>
+        <LoginForm onSubmit={handleLoginSubmit} />
+      </Paper>
+    </Box>
   )
 }
