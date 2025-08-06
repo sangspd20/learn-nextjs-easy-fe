@@ -1,10 +1,10 @@
+import { AutocompleteField, InputField } from '@/components/form'
 import { WorkFiltersPayload } from '@/models'
 import { Search } from '@mui/icons-material'
 import { InputAdornment, debounce } from '@mui/material'
 import { Box } from '@mui/system'
 import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
-import { InputField } from '../form'
 
 export interface WorkFiltersProps {
   initialValues?: WorkFiltersPayload
@@ -44,6 +44,8 @@ export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
           debounceSearchChange()
         }}
       />
+
+      <AutocompleteField name="tagList_search" placeholder="filter by category" control={control} />
     </Box>
   )
 }
