@@ -17,6 +17,7 @@ export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
     defaultValues: {
       search: '',
       ...initialValues,
+      selectedTagList: [],
     },
   })
 
@@ -50,9 +51,13 @@ export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
         label="Filter by category"
         placeholder="Categories"
         control={control}
-        options={[{ title: 'easy', key: 'ez' }]}
+        options={[
+          { title: 'easy', key: 'ez' },
+          { title: 'frontend', key: 'fr' },
+        ]}
         getOptionLabel={(option) => option.key}
         isOptionEqualToValue={(option, value) => option.key === value.key}
+        onChange={() => debounceSearchChange()}
       />
     </Box>
   )
