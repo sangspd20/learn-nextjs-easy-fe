@@ -7,18 +7,20 @@ import { useForm } from 'react-hook-form'
 import { InputField } from '../form'
 
 export interface WorkFiltersProps {
+  initialValues?: WorkFiltersPayload
+
   onSubmit?: (payload: WorkFiltersPayload) => void
 }
 
-export function WorkFilters({ onSubmit }: WorkFiltersProps) {
+export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
   const { control, handleSubmit } = useForm<WorkFiltersPayload>({
     defaultValues: {
       search: '',
+      ...initialValues,
     },
   })
 
   async function handleLoginSubmit(payload: WorkFiltersPayload) {
-    console.log('form submit', payload)
     await onSubmit?.(payload)
   }
 
