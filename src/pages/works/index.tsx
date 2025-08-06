@@ -4,7 +4,6 @@ import { useWorkList } from '@/hooks'
 import { ListParams, WorkFiltersPayload } from '@/models'
 import { Box, Container, Pagination, Stack, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
 export default function WorksPage() {
   const router = useRouter()
