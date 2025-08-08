@@ -2,8 +2,9 @@ import { MainLayout } from '@/components/layout'
 import { WorkFilters, WorkList } from '@/components/work'
 import { useWorkListInfinity } from '@/hooks'
 import { ListParams, ListResponse, Work, WorkFiltersPayload } from '@/models'
-import { Box, Button, Container, Skeleton, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Container, Skeleton, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
+import { useInView } from 'react-intersection-observer'
 
 export default function InfinityScrollPage() {
   const router = useRouter()
@@ -27,8 +28,16 @@ export default function InfinityScrollPage() {
 
       return result
     }, []) || []
-  // const { _limit, _totalRows, _page } = data?.pagination || {}
-  // const totalPages = Boolean(_totalRows) ? Math.ceil(_totalRows / _limit) : 0
+
+  const totalRows = data?.[0]?.pagination?._totalRows || 0
+  const showLoadMore = totalRows > workList.length
+  const loadingMore = isValidating && workList.length > 0
+
+  const { ref } = useInView({
+    onChange(inView) {
+      if (inView) setSize((x) => x + 1)
+    },
+  })
 
   function handleFiltersChange(newFilters: WorkFiltersPayload) {
     router.push(
@@ -73,9 +82,11 @@ export default function InfinityScrollPage() {
 
         <WorkList workList={workList} loading={!router.isReady || isLoading} />
 
-        <Button variant="contained" onClick={() => setSize((x) => x + 1)}>
-          Load More
-        </Button>
+        {showLoadMore && (
+          <Box ref={ref} sx={{ textAlign: 'center', height: '50px' }}>
+            {loadingMore && <CircularProgress size={24} />}
+          </Box>
+        )}
       </Container>
     </Box>
   )
