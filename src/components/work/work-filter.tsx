@@ -25,6 +25,10 @@ export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
   })
 
   async function handleLoginSubmit(payload: WorkFiltersPayload) {
+    if (!payload) return
+
+    payload.tagList_like = payload.selectedTagList?.join('|') || ''
+    delete payload.selectedTagList
     await onSubmit?.(payload)
   }
 
