@@ -1,4 +1,5 @@
 import { AutocompleteField, InputField } from '@/components/form'
+import { useTagList } from '@/hooks'
 import { WorkFiltersPayload } from '@/models'
 import { Search } from '@mui/icons-material'
 import { InputAdornment, debounce } from '@mui/material'
@@ -13,6 +14,8 @@ export interface WorkFiltersProps {
 }
 
 export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
+  const { data } = useTagList({})
+  const tagList = data?.data || []
   const { control, handleSubmit } = useForm<WorkFiltersPayload>({
     defaultValues: {
       search: '',
@@ -51,12 +54,9 @@ export function WorkFilters({ onSubmit, initialValues }: WorkFiltersProps) {
         label="Filter by category"
         placeholder="Categories"
         control={control}
-        options={[
-          { title: 'easy', key: 'ez' },
-          { title: 'frontend', key: 'fr' },
-        ]}
-        getOptionLabel={(option) => option.key}
-        isOptionEqualToValue={(option, value) => option.key === value.key}
+        options={tagList}
+        getOptionLabel={(option) => option}
+        isOptionEqualToValue={(option, value) => option === value}
         onChange={() => debounceSearchChange()}
       />
     </Box>
