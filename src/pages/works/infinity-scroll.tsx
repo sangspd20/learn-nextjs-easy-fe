@@ -1,11 +1,11 @@
 import { MainLayout } from '@/components/layout'
 import { WorkFilters, WorkList } from '@/components/work'
 import { useWorkListInfinity } from '@/hooks'
-import { ListParams, WorkFiltersPayload } from '@/models'
-import { Box, Container, Skeleton, Typography } from '@mui/material'
+import { ListParams, ListResponse, Work, WorkFiltersPayload } from '@/models'
+import { Box, Button, Container, Skeleton, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 
-export default function WorksPage() {
+export default function InfinityScrollPage() {
   const router = useRouter()
   const filters: Partial<ListParams> = {
     ...router.query,
@@ -20,6 +20,13 @@ export default function WorksPage() {
     enabled: router.isReady,
   })
   console.log({ data, isLoading, isValidating, size })
+
+  const workList: Array<Work> =
+    data?.reduce((result: Array<Work>, currentPage: ListResponse<Work>) => {
+      result.push(...currentPage.data)
+
+      return result
+    }, []) || []
   // const { _limit, _totalRows, _page } = data?.pagination || {}
   // const totalPages = Boolean(_totalRows) ? Math.ceil(_totalRows / _limit) : 0
 
@@ -64,13 +71,17 @@ export default function WorksPage() {
           />
         )}
 
-        <WorkList workList={[]} loading={!router.isReady || isLoading} />
+        <WorkList workList={workList} loading={!router.isReady || isLoading} />
+
+        <Button variant="contained" onClick={() => setSize((x) => x + 1)}>
+          Load More
+        </Button>
       </Container>
     </Box>
   )
 }
 
-WorksPage.Layout = MainLayout
+InfinityScrollPage.Layout = MainLayout
 
 export async function getStaticProps() {
   console.log('get static props')
